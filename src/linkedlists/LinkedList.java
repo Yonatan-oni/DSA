@@ -16,6 +16,8 @@ public class LinkedList {
     }
     private Node first;
     private Node last;
+    private Node reverse;
+
 
     private final ArrayList<Node> nodes = new ArrayList<>();
 
@@ -70,7 +72,37 @@ public class LinkedList {
             first = second;
         }else throw new NoSuchElementException();
 
+    }
 
+    public void reverse(){
+        while(last != null){
+//            System.out.println(last.value);
+            reverse = new Node(last.value, reverse);
+            last = last.next;
+        }
+        last =reverse;
+        reverse = null;
+    }
+
+    public int kthTerm(int k){
+        Node firstPointer = last;
+        Node secondPointer = last;
+
+        int stop = 0;
+        while (stop != (k-1)) {
+            secondPointer = secondPointer.next;
+            stop++;
+        }
+        while (secondPointer.next != null){
+            firstPointer = firstPointer.next;
+            secondPointer = secondPointer.next;
+        }
+
+//        System.out.println("Pointers");
+//        System.out.println(firstPointer.value);
+//        System.out.println(secondPointer.value);
+
+        return firstPointer.value;
     }
 
 }
